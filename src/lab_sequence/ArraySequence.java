@@ -5,8 +5,6 @@
  */
 package lab_sequence;
 
-
-
 /**
  *
  * @author B00316640
@@ -90,19 +88,19 @@ public class ArraySequence<E> implements Sequence<E> {
      * than the number of elements in this Sequence object.
      */
     public void add(int k, E element) {
-        if(get(k) == null){
+        if (get(k) == null) {
+
             this.data[k] = element;
         } else {
-            
+            E[] b = (E[]) new Object[data.length];
+            System.arraycopy(data, 0, b, 0, k);
+            b[k] = element;
+            System.arraycopy(data, k, b, k + 1, size - k);
+            this.data = b;
+            size++;
         }
-        
-  
-        size++;
-        
-        
+
     }
-    
-  
 
     /**
      * Removes the element at a specified index in this Sequence object and
@@ -118,30 +116,52 @@ public class ArraySequence<E> implements Sequence<E> {
      */
     public E remove(int k) {
 
-        
-        if(get(k)!= null){
-         this.data[k] = null;
-         size--;
-        }
-        else{
+        if (get(k) != null) {
+            this.data[k] = null;
+            for (int i = k; i < size; i++) {
+
+                data[i] = data[i + 1];
+
+            }
+            size--;
+        } else {
             System.out.println("THERE ARE NO ELEMENTS");
         }
         return (E) this;
     }
 
+    /**
+     * Returns true if this Sequence object contains one or more elements equal
+     * to the given Object, otherwise returns false.
+     *
+     * @param obj - the object to search for.
+     *
+     * @return the true if the object is present, false if not.
+     *
+     */
+    public boolean contains(Object obj) {
+        for(int i=0; i<size; i++){
+            if(data[i]==obj){
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * display all the elements in the sequence object
      */
+
     public void display() {
         for (E e : data) {
             if (e != null) {
                 System.out.println(e);
+                
             } else {
                 break;
             }
         }
+        System.out.println("-------------------------------");
     }
 
-    
 }

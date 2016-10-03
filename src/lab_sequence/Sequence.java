@@ -61,7 +61,7 @@ public interface Sequence<E> {
      * @throws IndexOutOfBoundsException - if k is either negative or greater
      * than the number of elements in this Sequence object.
      */
-    public void add(int k, E element);
+     void add(int k, E element);
 
     /**
      * Removes the element at a specified index in this Sequence object and
@@ -75,8 +75,18 @@ public interface Sequence<E> {
      * @throws IndexOutOfBoundsException - if k is either negative or greater
      * than or equal to the number of elements in this Sequence object.
      */
+     E remove(int k);
 
-    public E remove(int k);
+    /**
+     * Returns true if this Sequence object contains one or more elements equal
+     * to the given Object, otherwise returns false.
+     *
+     * @param obj - the object to search for.
+     *
+     * @return the true if the object is present, false if not.
+     *
+     */
+    boolean contains(Object obj);
 
     void display();
 
